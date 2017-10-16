@@ -27,7 +27,7 @@ jobs:
   - put: deploy-movie-fun-service
     params:
       manifest: movie-fun-service-source/manifest.yml
-      path: package-output/moviefun.war
+      path: package-output/movie-fun-service.war
 
 - name: smoke_test
   public: true

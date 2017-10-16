@@ -14,7 +14,7 @@ if [ $war_count -gt 1 ]; then
   exit 1
 fi
 
-find movie-fun-service-source/target -type f -name *.war -exec cp "{}" package-output/attendee-service.war \;
+find movie-fun-service-source/target -type f -name *.war -exec cp "{}" package-output/movie-fun-service.war \;
 
 echo "Done packaging"
 exit 0
