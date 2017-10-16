@@ -26,8 +26,8 @@ jobs:
     file: movie-fun-service-source/ci/tasks/package.yml
   - put: deploy-movie-fun-service
     params:
-      manifest: movie-fun-service/manifest.yml
-      path: package-output/movie-fun-service.war
+      manifest: movie-fun-service-source/manifest.yml
+      path: package-output/moviefun.war
 
 - name: smoke_test
   public: true
