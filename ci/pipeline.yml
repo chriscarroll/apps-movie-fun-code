@@ -1,0 +1,41 @@
+---
+resources:
+- name: movie-fun-service-source
+  type: git
+  source:
+    uri: https://github.com/chriscarroll/apps-movie-fun-code
+    branch: spring-boot
+
+- name: deploy-movie-fun-service
+  type: cf
+  source:
+    api: api.system.cumuluslabs.io
+    username: {{cf-user}}
+    password: {{cf-password}}
+    organization: cchris-pal
+    space: sandbox
+    skip_cert_check: true
+
+jobs:
+- name: deploy
+  public: true
+  plan:
+  - get: movie-fun-service-source
+    trigger: true
+  - task: package
+    file: movie-fun-service-source/ci/tasks/package.yml
+  - put: deploy-movie-fun-service
+    params:
+      manifest: movie-fun-service/manifest.yml
+      path: package-output/movie-fun-service.war
+
+- name: smoke_test
+  public: true
+  plan:
+  - get: movie-fun-service-source
+    trigger: true
+    passed: [deploy]
+  - task: smoke_test
+    file: movie-fun-service-source/ci/tasks/smoke-test.yml
+    params:
+      MOVIE_FUN_URL: http://movie-fun-service-uncravatted-piccolo.apps.cumuluslabs.io

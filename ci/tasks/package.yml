@@ -1,0 +1,17 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: java
+    tag: "8"
+
+inputs:
+- name: movie-fun-service-source
+
+outputs:
+- name: package-output
+
+run:
+  path: movie-fun-service-source/ci/tasks/package.sh

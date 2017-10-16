@@ -1,0 +1,10 @@
+applications:
+- name: movie-fun-service
+  instances: 1
+  memory: 1024M
+  disk_quota: 1024M
+  random-route: true
+  stack: cflinuxfs2
+  path: target/moviefun.war
+  services:
+    - movie-fun-mysql
